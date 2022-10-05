@@ -5,7 +5,7 @@ var quizCardEl = document.getElementById('quizCard');
 var nextBtnEl = document.getElementById('nextBtn');
 var questionNum = 0
 
-document.getElementById('highscores').addEventListener("click", function() {
+document.getElementById('highscores').addEventListener("click", function () {
     beginCardEl.style.display = 'none';
     quizCardEl.style.display = 'none';
     nextBtnEl.style.display = 'none';
@@ -13,22 +13,22 @@ document.getElementById('highscores').addEventListener("click", function() {
     document.getElementById('highscoresList').style.display = 'flex';
 })
 
-document.getElementById('reset').addEventListener("click", function() {
+document.getElementById('reset').addEventListener("click", function () {
     location.reload();
 })
 
 function countdown() {
     var timeLeft = 61;
     var timeInterval = setInterval(function () {
-    timeLeft--;
-    timerEl.textContent = timeLeft + " seconds remaining";
+        timeLeft--;
+        timerEl.textContent = timeLeft + " seconds remaining";
 
 
-    if(timeLeft === 0) {
-        clearInterval(timeInterval);
-        timerEl.textContent = "Times up!"
-        //end quiz
-    }
+        if (timeLeft === 0) {
+            clearInterval(timeInterval);
+            timerEl.textContent = "Times up!"
+            //end quiz
+        }
 
     }, 1000);
 }
@@ -60,31 +60,31 @@ function nextQuestion() {
     //hide next btn
     nextBtnEl.style.display = 'none';
     //update question
-    if (questionNum===0) {
+    if (questionNum === 1) {
         quizCardEl.children[0].textContent = "Question 2 Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, velit et. Dolor, repellendus praesentium, deleniti eaque repudiandae veniam, distinctio et dignissimos quod voluptatibus dolorum? Reiciendis minima molestias voluptate iste ipsum."
         quizCardEl.children[1].textContent = "Wrong answer"
         quizCardEl.children[2].textContent = "Wrong answer"
         quizCardEl.children[3].textContent = "Wrong answer"
         quizCardEl.children[4].textContent = "Correct answer"
-    } else if (questionNum===1) {
+    } else if (questionNum === 2) {
         quizCardEl.children[0].textContent = "Question 3 Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, velit et. Dolor, repellendus praesentium, deleniti eaque repudiandae veniam, distinctio et dignissimos quod voluptatibus dolorum? Reiciendis minima molestias voluptate iste ipsum."
         quizCardEl.children[1].textContent = "Wrong answer"
         quizCardEl.children[2].textContent = "Wrong answer"
         quizCardEl.children[3].textContent = "Correct answer"
         quizCardEl.children[4].textContent = "Wrong answer"
-    } else if (questionNum===2) {
+    } else if (questionNum === 3) {
         quizCardEl.children[0].textContent = "Question 4 Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, velit et. Dolor, repellendus praesentium, deleniti eaque repudiandae veniam, distinctio et dignissimos quod voluptatibus dolorum? Reiciendis minima molestias voluptate iste ipsum."
         quizCardEl.children[1].textContent = "Wrong answer"
         quizCardEl.children[2].textContent = "Correct answer"
         quizCardEl.children[3].textContent = "Wrong answer"
         quizCardEl.children[4].textContent = "Wrong answer"
-    }  else if (questionNum===3) {
+    } else if (questionNum === 4) {
         quizCardEl.children[0].textContent = "Question 5 Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, velit et. Dolor, repellendus praesentium, deleniti eaque repudiandae veniam, distinctio et dignissimos quod voluptatibus dolorum? Reiciendis minima molestias voluptate iste ipsum."
         quizCardEl.children[1].textContent = "Correct answer"
         quizCardEl.children[2].textContent = "Wrong answer"
         quizCardEl.children[3].textContent = "Wrong answer"
         quizCardEl.children[4].textContent = "Wrong answer"
-    } else if (questionNum===4) {
+    } else if (questionNum === 5) {
         quizCardEl.children[0].textContent = "Question 6 Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, velit et. Dolor, repellendus praesentium, deleniti eaque repudiandae veniam, distinctio et dignissimos quod voluptatibus dolorum? Reiciendis minima molestias voluptate iste ipsum."
         quizCardEl.children[1].textContent = "Wrong answer"
         quizCardEl.children[2].textContent = "Wrong answer"
@@ -105,12 +105,18 @@ startEl.addEventListener("click", function () {
 })
 
 nextBtnEl.addEventListener("click", function () {
+    questionNum++
     nextQuestion()
-    questionNum ++
+    console.log(userAnswer)
     console.log(questionNum)
+    if (questionNum == 1 && userAnswer == "answer2" || questionNum == 2 && userAnswer == "answer4" || questionNum == 3 && userAnswer == "answer3" || questionNum == 4 && userAnswer == "answer2" || questionNum == 5 && userAnswer == "answer1" || questionNum == 6 && userAnswer == "answer3") {
+        console.log('yes')
+
+    } else { console.log('no') }
 })
 
-quizCardEl.addEventListener("click", function() {
+quizCardEl.addEventListener("click", function (event) {
     nextBtnEl.style.display = 'flex';
-    //record answer selected
+    userAnswer = event.target.id;
+    return userAnswer;
 })
