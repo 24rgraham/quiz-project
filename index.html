@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="Description" content="Enter your description here" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/style.css">
+  <title>Quiz!</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand navbar-light bg-light">
+        <a class="navbar-brand" href="#">Quiz!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#highscoresList">Highscores <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+          <span class="navbar-text" id="timeRemaining">
+            
+          </span>
+        </div>
+    </nav>
+
+    <div class="card mt-lg-5 pt-md-3 mt-md-3 p-2 m-2 col-md-6 col-12 mx-auto" id="beginCard">
+        <div class="card-header">
+          Begin Quiz
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Would you like to take a Quiz? </h5>
+          <p class="card-text">It is very fun quiz.</p>
+          <a href="#" class="btn btn-primary" id="startBtn">Start</a>
+        </div>
+    </div>
+
+    <div class="list-group pt-lg-5 mt-lg-5 pt-md-3 mt-md-3 p-2 m-2 col-md-6 col-12 mx-auto" id="quizCard">
+        <button type="button" class="list-group-item-info" disabled>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, velit et. Dolor, repellendus praesentium, deleniti eaque repudiandae veniam, distinctio et dignissimos quod voluptatibus dolorum? Reiciendis minima molestias voluptate iste ipsum.
+        </button>
+        <button type="button" class="list-group-item list-group-item-action">Dapibus ac facilisis in</button>
+        <button type="button" class="list-group-item list-group-item-action">Morbi leo risus</button>
+        <button type="button" class="list-group-item list-group-item-action">Porta ac consectetur ac</button>
+        <button type="button" class="list-group-item list-group-item-action">Vestibulum at eros</button>
+        <button type="button" class="btn btn-info w-50 p-2 mt-4 mx-auto">Next</button>
+    </div>
+    <ul class="list-group p-2 m-2 col-md-6 col-12 mx-auto" id="highscoresList">
+        <li class="list-group-item active">Highscores</li>
+        <li class="list-group-item">Dapibus ac facilisis in</li>
+        <li class="list-group-item">Morbi leo risus</li>
+        <li class="list-group-item">Porta ac consectetur ac</li>
+        <li class="list-group-item">Vestibulum at eros</li>
+    </ul>
+
+
+
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="./assets/script.js"></script>
+
+</html>
