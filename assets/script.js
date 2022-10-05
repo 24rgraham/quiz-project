@@ -3,7 +3,9 @@ var startEl = document.getElementById('startBtn');
 var beginCardEl = document.getElementById('beginCard');
 var quizCardEl = document.getElementById('quizCard');
 var nextBtnEl = document.getElementById('nextBtn');
-var questionNum = 0
+var questionNum = 0;
+var wrong = false;
+var win = false;
 
 document.getElementById('highscores').addEventListener("click", function () {
     beginCardEl.style.display = 'none';
@@ -18,19 +20,36 @@ document.getElementById('reset').addEventListener("click", function () {
 })
 
 function countdown() {
-    var timeLeft = 61;
+    var timeLeft = 6050;
+
+
     var timeInterval = setInterval(function () {
+        if (wrong===true) {
+            timeLeft -= 1000;
+            wrong=false;
+        }
+        if (win===true) {
+            console.log(timeLeft)
+            userScore = timeLeft
+            document.getElementById('userScore').textContent="Your score is " + userScore + '!'
+            return userScore;
+            
+        }
         timeLeft--;
-        timerEl.textContent = timeLeft + " seconds remaining";
+        timerEl.textContent = Math.floor(timeLeft*0.01) + " seconds remaining";
 
 
         if (timeLeft === 0) {
             clearInterval(timeInterval);
-            timerEl.textContent = "Times up!"
+            timerEl.textContent = "Times up loser!";
+            quizCardEl.style.display = 'none';
+            nextBtnEl.style.display = 'none';
+            document.getElementById('highscoresList').style.display = 'flex';
+
             //end quiz
         }
 
-    }, 1000);
+    }, 10);
 }
 
 
@@ -93,9 +112,11 @@ function nextQuestion() {
     } else {
         quizCardEl.style.display = 'none';
         nextBtnEl.style.display = 'none';
-        timerEl.style.display = 'none';
         document.getElementById('highscoresList').style.display = 'flex';
+        document.getElementById('userScoreInput').style.display = 'flex';
+        win = true;
     }
+    return win;
 
 }
 
@@ -105,14 +126,12 @@ startEl.addEventListener("click", function () {
 })
 
 nextBtnEl.addEventListener("click", function () {
-    questionNum++
-    nextQuestion()
-    console.log(userAnswer)
-    console.log(questionNum)
-    if (questionNum == 1 && userAnswer == "answer2" || questionNum == 2 && userAnswer == "answer4" || questionNum == 3 && userAnswer == "answer3" || questionNum == 4 && userAnswer == "answer2" || questionNum == 5 && userAnswer == "answer1" || questionNum == 6 && userAnswer == "answer3") {
-        console.log('yes')
-
-    } else { console.log('no') }
+    questionNum++;
+    nextQuestion();
+    if (questionNum == 1 && userAnswer == "answer2" || questionNum == 2 && userAnswer == "answer4" || questionNum == 3 && userAnswer == "answer3" || questionNum == 4 && userAnswer == "answer2" || questionNum == 5 && userAnswer == "answer1" || questionNum == 6 && userAnswer == "answer3") { 
+    } else {wrong=true};
+    return wrong;
+    
 })
 
 quizCardEl.addEventListener("click", function (event) {
