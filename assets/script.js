@@ -3,8 +3,7 @@ var startEl = document.getElementById('startBtn');
 var beginCardEl = document.getElementById('beginCard');
 var quizCardEl = document.getElementById('quizCard');
 var nextBtnEl = document.getElementById('nextBtn');
-var items = [JSON.parse(localStorage.getItem('itemsy'))]
-var headers = ['player', 'score']
+var items = []
 var questionNum = 0;
 var wrong = false;
 var win = false;
@@ -15,7 +14,7 @@ document.getElementById('highscores').addEventListener("click", function () {
     nextBtnEl.style.display = 'none';
     timerEl.style.display = 'none';
     document.getElementById('highscoresList').style.display = 'flex';
-    // displayScores()
+    displayScores()
 })
 
 document.getElementById('reset').addEventListener("click", function () {
@@ -48,6 +47,7 @@ function countdown() {
             quizCardEl.style.display = 'none';
             nextBtnEl.style.display = 'none';
             document.getElementById('highscoresList').style.display = 'flex';
+            displayScores()
 
             //end quiz
         }
@@ -115,7 +115,6 @@ function nextQuestion() {
     } else {
         quizCardEl.style.display = 'none';
         nextBtnEl.style.display = 'none';
-        document.getElementById('highscoresList').style.display = 'flex';
         document.getElementById('userScoreInput').style.display = 'flex';
         win = true;
     }
@@ -123,17 +122,28 @@ function nextQuestion() {
 
 }
 
-// function displayScores() {
-//     items = [JSON.parse(localStorage.getItem('itemsy'))];
-//     items.sort(function(a, b){return a.score - b.score});
-//     for (i = items.length; i >= 0; i--) {
-//         var node=document.createElement('li');
-//         node.appendChild(document.createTextNode(items[i].player + " " + items[i].score))
-//         document.getElementById('highscoresList').appendChild(node);
-//     }
+function displayScores() {
+    storedItems = JSON.parse(localStorage.getItem('items'));
+    if (storedItems !== null) {
+        items = storedItems;
+      }
+    items.sort(function(a, b){return b.score - a.score});
+    console.log(items)
+
+    for (var i = 0; i < items.length; i++) {
+        var thing = "Name: " + items[i].player + " || Score: " + items[i].score;
+    
+        var li = document.createElement("li");
+        li.textContent = thing;
+        li.setAttribute("class", "list-group-item");
+    
+        highscoresList.appendChild(li);
+      }
+
+    document.getElementById('highscores').style.display = 'none';
 
     
-// }
+}
 
 
 startEl.addEventListener("click", function () {
@@ -158,11 +168,21 @@ quizCardEl.addEventListener("click", function (event) {
 document.getElementById('submitScoreBtn').addEventListener("click", function (event) {
     //save user name and score to local storage
     event.preventDefault();
+    storedItems = JSON.parse(localStorage.getItem('items'));
+    if (storedItems !== null) {
+        items = storedItems;
+      }
+    document.getElementById('highscoresList').style.display = 'flex';
+    document.getElementById('userScoreInput').style.display = 'none';
     userName = document.getElementById('userName').value
-    var item = {player: userName, score: userScore}
-    items.push(item)
-    localStorage.setItem("itemsy", JSON.stringify(items))
-    // displayScores()
+    if (userName !== "") {
+        var item = {player: userName, score: userScore}
+        items.push(item)
+        localStorage.setItem("items", JSON.stringify(items))
+        console.log(items)
+      }
+    displayScores()
+
 
     
 })
