@@ -31,7 +31,6 @@ function countdown() {
             wrong=false;
         }
         if (win===true) {
-            console.log(timeLeft)
             userScore = timeLeft
             document.getElementById('userScore').textContent="Your score is " + userScore + '!'
             return userScore;
@@ -128,7 +127,6 @@ function displayScores() {
         items = storedItems;
       }
     items.sort(function(a, b){return b.score - a.score});
-    console.log(items)
 
     for (var i = 0; i < items.length; i++) {
         var thing = "Name: " + items[i].player + " || Score: " + items[i].score;
@@ -179,7 +177,6 @@ document.getElementById('submitScoreBtn').addEventListener("click", function (ev
         var item = {player: userName, score: userScore}
         items.push(item)
         localStorage.setItem("items", JSON.stringify(items))
-        console.log(items)
       }
     displayScores()
 
